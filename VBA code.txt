@@ -1,0 +1,35 @@
+Sub totalVolume()
+    
+    Dim currentRow As Variant
+    Dim nextRow As Variant
+    Dim currentAmt As Variant
+    Dim totalVolume As Variant
+    Dim rowCount As Variant
+    Dim i As Variant
+    Dim nextVolume As Variant
+    
+    rowCount = Cells(Rows.Count, "A").End(xlUp).Row
+
+    Dim j As Integer
+    j = 2
+    totalVolume = Cells(2, 7).Value
+    Cells(1, 9).Value = "Ticker"
+    Cells(1, 10).Value = "Total Stock Volume"
+    
+    'runs through all rows
+    For i = 2 To rowCount
+        currentRow = Cells(i, 1).Value
+        nextRow = Cells(i + 1, 1).Value
+        nextVolume = Cells(i + 1, 7).Value
+     
+             If currentRow = nextRow Then
+                totalVolume = totalVolume + nextVolume
+             ElseIf currentRow <> nextRow Then
+                Cells(j, 9) = currentRow
+                Cells(j, 10) = totalVolume
+                j = j + 1
+                totalVolume = 0
+            
+            End If
+    Next i
+End Sub
